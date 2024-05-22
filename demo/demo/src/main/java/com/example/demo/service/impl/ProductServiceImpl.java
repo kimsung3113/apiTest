@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.data.dto.ProductDto;
-import com.example.demo.data.entity.ProductEntity;
+import com.example.demo.data.entity.Product;
 import com.example.demo.data.handler.ProductDataHandler;
 import com.example.demo.service.ProductService;
 
@@ -21,10 +21,10 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ProductDto saveProduct(String productId, String productName, int productPrice, int productStock) {
 		// TODO Auto-generated method stub
-		ProductEntity productEntity = productDataHandler.saveProductEntity(productId, productName, productPrice, productStock);
+		Product productEntity = productDataHandler.saveProductEntity(productId, productName, productPrice, productStock);
 		
-		ProductDto productDto = new ProductDto(productEntity.getProductId(),
-				productEntity.getProductName(), productEntity.getProductPrice(), productEntity.getProductStock());
+		ProductDto productDto = new ProductDto(productEntity.getId(),
+				productEntity.getName(), productEntity.getPrice(), productEntity.getStock());
 		
 		return productDto;
 	}
@@ -33,10 +33,10 @@ public class ProductServiceImpl implements ProductService{
 	public ProductDto getProduct(String productId) {
 		// TODO Auto-generated method stub
 		
-		ProductEntity productEntity = productDataHandler.getProductEntity(productId);
+		Product productEntity = productDataHandler.getProductEntity(productId);
 		
-		ProductDto ProductDto = new ProductDto(productEntity.getProductId(),
-				productEntity.getProductName(), productEntity.getProductPrice(), productEntity.getProductStock());
+		ProductDto ProductDto = new ProductDto(productEntity.getId(),
+				productEntity.getName(), productEntity.getPrice(), productEntity.getStock());
 		return ProductDto;
 	}
 	
