@@ -16,6 +16,7 @@ import com.example.demo.data.dao.ShortUrlDAO;
 import com.example.demo.data.dto.NaverUriDto;
 import com.example.demo.data.dto.ShortUrlResponseDto;
 import com.example.demo.data.entity.ShortUrl;
+import com.example.demo.data.repository.ShortUrlRedisRepository;
 import com.example.demo.service.ShortUrlService;
 
 
@@ -24,27 +25,27 @@ public class ShortUrlServiceImpl implements ShortUrlService {
 
   private final Logger LOGGER = LoggerFactory.getLogger(ShortUrlServiceImpl.class);
   private final ShortUrlDAO shortUrlDAO;
-  //private final ShortUrlRedisRepository shortUrlRedisRepository;
+  private final ShortUrlRedisRepository shortUrlRedisRepository;
 
   @Autowired
   public ShortUrlServiceImpl(
-      ShortUrlDAO shortUrlDAO) {
+      ShortUrlDAO shortUrlDAO, ShortUrlRedisRepository shortUrlRedisRepository) {
     this.shortUrlDAO = shortUrlDAO;
-//    this.shortUrlRedisRepository = shortUrlRedisRepository;
+    this.shortUrlRedisRepository = shortUrlRedisRepository;
   }
 
   @Override
   public ShortUrlResponseDto getShortUrl(String clientId, String clientSecret, String originalUrl) {
     LOGGER.info("[getShortUrl] request data : {}", originalUrl);
 
-    // Cache Logic
-//    Optional<ShortUrlResponseDto> foundResponseDto = shortUrlRedisRepository.findById(originalUrl);
-//    if (foundResponseDto.isPresent()) {
-//      LOGGER.info("[getShortUrl] Cache Data existed.");
-//      return foundResponseDto.get();
-//    } else {
-//      LOGGER.info("[getShortUrl] Cache Data does not existed.");
-//    }
+    // Cache Logic - 가져오는 방법
+    Optional<ShortUrlResponseDto> foundResponseDto = shortUrlRedisRepository.findById(originalUrl);
+    if (foundResponseDto.isPresent()) {
+      LOGGER.info("[getShortUrl] Cache Data existed.");
+      return foundResponseDto.get();
+    } else {
+      LOGGER.info("[getShortUrl] Cache Data does not existed.");
+    }
 
     ShortUrl getShortUrl = shortUrlDAO.getShortUrl(originalUrl);
 
@@ -74,7 +75,8 @@ public class ShortUrlServiceImpl implements ShortUrlService {
 
     ShortUrlResponseDto shortUrlResponseDto = new ShortUrlResponseDto(orgUrl, shortUrl);
 
-//    shortUrlRedisRepository.save(shortUrlResponseDto);
+    // Cache Logic - 저장
+    shortUrlRedisRepository.save(shortUrlResponseDto);
 
     LOGGER.info("[getShortUrl] Response DTO : {}", shortUrlResponseDto);
     return shortUrlResponseDto;
