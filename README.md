@@ -1,6 +1,9 @@
 # apiTest
 sunghun API project test
 
+SpringBoot 3.1.11 version
+mySql 8.0.32 version
+
 
 1. JPA 사용 DB 연동 test(@query)
 2. Junit 단위테스트
@@ -12,3 +15,4 @@ sunghun API project test
 8. docker-compose파일로 image 올려 실행(db, redis)
 9. property key Jasypt로 암호화
 10. profile로 local, dev properties 분리
+11. devtools, swagger로 API test
