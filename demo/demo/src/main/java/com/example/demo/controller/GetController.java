@@ -13,6 +13,12 @@ import com.example.demo.dto.MemberDTO;
 @RestController
 @RequestMapping(value = "/api/v1/get-api")
 public class GetController {
+	
+	@GetMapping(value = "/name")
+	public String getName() {
+		System.out.println("getName 실행되었습니다.");
+		return "Sunghun";
+	}
 
 	// http://localhost:8080/api/v1/get-api/variable1/firstVariableTest
 	@GetMapping(value = "/variable1/{variable}")

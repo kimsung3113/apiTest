@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.example.demo.data.dto.ProductDto;
-import com.example.demo.data.entity.ProductEntity;
+import com.example.demo.data.entity.Product;
 import com.example.demo.data.handler.impl.ProductDataHandlerImpl;
 
 // 2가지 방법.
@@ -45,7 +45,7 @@ public class ProductServiceImplTest {
 		
 		//given - 가정사항 세팅.
 		Mockito.when(productDataHandler.getProductEntity("123"))	// 메서드 후출시
-		 	.thenReturn(new ProductEntity("123", "pen", 2000, 1000)); // 이것을 리턴
+		 	.thenReturn(new Product("123", "pen", 2000, 1000)); // 이것을 리턴
 		
 		ProductDto productDto = productService.getProduct("123");
 		
@@ -63,7 +63,7 @@ public class ProductServiceImplTest {
 		
 		//given
 		Mockito.when(productDataHandler.saveProductEntity("123", "pen", 2000, 1000))	
-		 	.thenReturn(new ProductEntity("123", "pen", 2000, 1000));
+		 	.thenReturn(new Product("123", "pen", 2000, 1000));
 		
 		ProductDto productDto = productService.saveProduct("123", "pen", 2000, 1000);
 		

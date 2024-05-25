@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.data.dao.ProductDAO;
-import com.example.demo.data.entity.ProductEntity;
+import com.example.demo.data.entity.Product;
 import com.example.demo.data.handler.ProductDataHandler;
 
 import jakarta.transaction.Transactional;
@@ -21,15 +21,15 @@ public class ProductDataHandlerImpl implements ProductDataHandler{
 	}
 	
 	@Override
-	public ProductEntity saveProductEntity(String productId, String productName, int productPrice, int productStock) {
+	public Product saveProductEntity(String productId, String productName, int productPrice, int productStock) {
 		// TODO Auto-generated method stub
-		ProductEntity productEntity = new ProductEntity(productId, productName, productPrice, productStock);
+		Product productEntity = new Product(productId, productName, productPrice, productStock);
 		
 		return productDAO.saveProduct(productEntity);
 	}
 	
 	@Override
-	public ProductEntity getProductEntity(String productId) {
+	public Product getProductEntity(String productId) {
 		// TODO Auto-generated method stub
 		return productDAO.getProduct(productId);
 	}
