@@ -16,3 +16,4 @@ mySql 8.0.32 version
 9. property key Jasypt로 암호화
 10. profile로 local, dev properties 분리
 11. devtools, swagger로 API test
+12. custom annotation 생성 및 test
