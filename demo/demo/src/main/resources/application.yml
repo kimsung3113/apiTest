@@ -1,8 +1,16 @@
-spring.application.name=demo
+server:
+  port: 8080
 
-spring.mvc.pathmatch.matching-strategy=ant-path-matcher
+spring: 
+  application: 
+    name: demo
+
+  mvc: 
+    pathmatch: 
+      matching-strategy: ant-path-matcher
 # spring profiles 설정
-spring.profiles.active=dev
+#  profiles: 
+#    active: dev
 #server.port=9091
 
 #MySQL 설정
@@ -13,10 +21,12 @@ spring.profiles.active=dev
 
 # Docker에 올린 DB 설정
 #spring.datasource.url=jdbc:mysql://localhost:3305/sunghun_api_shop
-spring.datasource.url=jdbc:mysql://localhost:3305/docker_db
-spring.datasource.username=ENC(noVO1527VogblfGq+CWJf3JgdMz4QSyr==)
-spring.datasource.password=ENC(HHlTdzXIx1f5mbd+pAA9HTPwpiLg6WjU)
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+  datasource:
+    url: jdbc:mysql://localhost:3305/docker_db
+    username: ENC(noVO1527VogblfGq+CWJf3JgdMz4QSyr==)
+    password: ENC(HHlTdzXIx1f5mbd+pAA9HTPwpiLg6WjU)
+    driverClassName: com.mysql.cj.jdbc.Driver
 
 #spring.datasource.username=sunghun.kim
 #spring.datasource.password=tjdgns12#
@@ -28,24 +38,70 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
   # update : SessionFactory가 올라갈 때 Object를 검사하여 테이블을 alter 시킨다. 데이터는 유지됨.
   # validate : update처럼 Object를 검사하지만, 스키마는 아무것도 건드리지 않고, Object와 스키마의 정보가 다르다면 에러를 발생시킨다.
   # none : 사용하지 않음
-spring.jpa.hibernate.ddl-auto=create
+  jpa: 
+    hibernate.ddl-auto: none
 # 요청을 받았을때 repository가 동작하는데 우리 동작과 매핑되어 있는 SQL들을 보여줄거냐?(test시 좋음)
-spring.jpa.show-sql=true
+    show-sql: true
 
 # 쿼리문을 format해 콘솔에서 가독성좋게 보여주는 설정
-spring.jpa.properties.hibernate.format_sql=true
+    properties: 
+      hibernate: 
+        format_sql: true
+        
+   # redis 설정
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 # JPA가 어떻게 쿼리를 만들어서 테이블을 생성하는지 확인하려면 로그 설정을 추가
-logging.level.org.hibernate.SQL=debug
+logging: 
+    level: 
+      org: 
+        hibernate: 
+          SQL: debug
 
 #Custom property
-sunghun.api.short.uri.id=OK50KchcdDwittZl2dQz
-sunghun.api.short.uri.secret=oN8EnapOdp
-sunghun.api.loading.message=## local 환경으로 실행되었습니다 ##
+sunghun: 
+   api: 
+      short: 
+          uri: 
+             id: OK50KchcdDwittZl2dQz
+             secret: oN8EnapOdp
+          loading: 
+           message: ## local 환경으로 실행되었습니다 ##
 
 # 프로퍼티 암호화 설정
-jasypt.encryptor.bean=jasyptStringEncryptor
+jasypt: 
+  encryptor: 
+    bean: jasyptStringEncryptor
 
-# redis 설정
-spring.data.redis.host=localhost
-spring.data.redis.port=6379
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+sunghun:
+  api:
+    loading:
+      message: '## local 환경으로 실행되었습니다 ##'
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+sunghun:
+  api:
+    loading:
+      message: '## dev 환경으로 실행되었습니다 ##'
+      
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+sunghun:
+  api:
+    loading:
+      message: '## prod 환경으로 실행되었습니다 ##'
