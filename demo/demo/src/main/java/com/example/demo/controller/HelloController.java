@@ -19,7 +19,7 @@ import com.example.demo.common.valid.TempDto;
 import jakarta.validation.Valid;
 
 @RestController
-@TypeAnnotation(name = "Hello?", value = "World")
+@TypeAnnotation(name = "Hello?", value = "SungHun")
 public class HelloController {
 	
   @FieldAnnotation(name = "returnValue", value = "Bye World!")
