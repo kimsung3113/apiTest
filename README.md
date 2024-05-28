@@ -15,5 +15,7 @@ mySql 8.0.32 version
 8. docker-compose파일로 image 올려 실행(db, redis)
 9. property key Jasypt로 암호화
 10. profile로 local, dev properties 분리
-11. devtools, swagger로 API test
+11. devtools, swagger, postman으로 API test
 12. custom annotation 생성 및 test
+13. gitignore 파일 추가
+14. maven -> gradle로 변경
