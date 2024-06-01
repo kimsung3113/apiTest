@@ -1,8 +1,10 @@
 plugins {
     id 'java-library'
-    id 'org.springframework.boot' version "3.1.11"
+    id 'maven-publish'
+    id 'org.springframework.boot' version "3.2.6"
     id 'io.spring.dependency-management' version "1.1.0"
     id 'io.freefair.lombok' version "6.6.1"	//플러그인으로 lombok을 쓸 수 있다.
+    id 'jacoco'
 }
 
 group = 'com.example'
@@ -19,22 +21,81 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.projectlombok:lombok:1.18.32'
     
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0'
     
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'org.jacoco:jacoco-maven-plugin:0.8.11'
+    
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis:3.1.11'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis:3.2.6'
     implementation 'org.springframework.boot:spring-boot-devtools'
     implementation 'com.mysql:mysql-connector-j:8.0.33'
+    
+    implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    
+    //testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    
 }
+
+
+configurations {
+    testRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+test {
+	useJUnitPlatform()
+	// systemProperties["spring.profiles.active"] = "test"
+	finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion = "0.8.10"
+    // reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    
+    dependsOn test
+
+    reports {
+        xml.required = false
+        html.required = true
+        csv.required = false
+    }
+    
+    finalizedBy 'jacocoTestCoverageVerification'
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            enabled = true
+            element = 'CLASS'
+
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.80
+            }
+
+            limit {
+                counter = 'METHOD'
+                value = 'COVEREDRATIO'
+                minimum = 0.80
+            }
+        }
+    }
+}
+
 
 
 tasks.withType(JavaCompile) {
@@ -45,7 +106,15 @@ tasks.withType(Javadoc) {
     options.encoding = 'UTF-8'
 }
 
-tasks.test {
-	useJUnitPlatform()
-	// systemProperties["spring.profiles.active"] = "test"
-}
+
+task testCoverage(type: Test) {
+  group 'verification'
+  description 'Runs the unit tests with coverage'
+
+  dependsOn(':test',
+            ':jacocoTestReport',
+            ':jacocoTestCoverageVerification')
+
+  tasks['jacocoTestReport'].mustRunAfter(tasks['test'])
+  tasks['jacocoTestCoverageVerification'].mustRunAfter(tasks['jacocoTestReport'])
+  }

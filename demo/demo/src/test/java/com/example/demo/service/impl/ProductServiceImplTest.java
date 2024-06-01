@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.example.demo.data.dto.ProductDto;
@@ -66,6 +67,8 @@ public class ProductServiceImplTest {
 		 	.thenReturn(new Product("123", "pen", 2000, 1000));
 		
 		ProductDto productDto = productService.saveProduct("123", "pen", 2000, 1000);
+		
+		System.out.println("saveProductTest 성공");
 		
 		Assertions.assertEquals(productDto.getProductId(), "123");
 		Assertions.assertEquals(productDto.getProductName(), "pen");

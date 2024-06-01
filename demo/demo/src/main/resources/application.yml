@@ -9,9 +9,9 @@ spring:
     pathmatch: 
       matching-strategy: ant-path-matcher
 # spring profiles 설정
-#  profiles: 
-#    active: dev
-#server.port=9091
+#  profiles:
+#    active: local
+
 
 #MySQL 설정
 #spring.datasource.url=jdbc:mysql://localhost:3306/jsptest
@@ -85,6 +85,12 @@ sunghun:
   api:
     loading:
       message: '## local 환경으로 실행되었습니다 ##'
+      
+datasource:
+    url: jdbc:mysql://localhost:3306/SpringBootAPITest
+    username: jspid
+    password: jsppass
+    driverClassName: com.mysql.cj.jdbc.Driver
 
 ---
 spring:
