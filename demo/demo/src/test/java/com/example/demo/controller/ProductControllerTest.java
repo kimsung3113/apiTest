@@ -14,23 +14,34 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebM
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.demo.config.ProfileManager;
+import com.example.demo.config.env.LocalConfiguration;
 import com.example.demo.data.dto.ProductDto;
 import com.example.demo.service.impl.ProductServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
+// @WebMvcTest 어노테이션은 컨트롤러 관련 빈만 로드하고, 전체 애플리케이션 컨텍스트를 로드하지 않습니다. 이로 인해 필요한 빈이 로드되지 않아 발생할 수 있다.
 @WebMvcTest(productController.class)
-// @AutoConfigureWebMvc : 이 어노테이션을 통해 MockMvc를 Builder 없이 주입받을 수 있다.
+//@AutoConfigureWebMvc //: 이 어노테이션을 통해 MockMvc를 Builder 없이 주입받을 수 있다.
 public class ProductControllerTest {
 
+	
 	@Autowired
 	private MockMvc mockMvc;
 	
 	// ProductController에서 잡고있는 Bean 객체에 대해 Mock 형태의 객체를 생성해줌
 	@MockBean
 	ProductServiceImpl productService;
+	
+	@MockBean
+	LocalConfiguration localConfiguration;
+	
+	@MockBean
+	ProfileManager profileManager;
 	
 	@Test
 	@DisplayName("Product 데이터 가져오기 테스트")

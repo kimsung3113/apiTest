@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
-    id 'org.springframework.boot' version "3.1.11"
+    id 'maven-publish'
+    id 'org.springframework.boot' version "3.2.6"
     id 'io.spring.dependency-management' version "1.1.0"
     id 'io.freefair.lombok' version "6.6.1"	//플러그인으로 lombok을 쓸 수 있다.
     id 'jacoco'
@@ -20,28 +21,35 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.projectlombok:lombok:1.18.32'
     
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0'
     
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'com.google.code.gson:gson:2.10.1'
     
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis:3.1.11'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis:3.2.6'
     implementation 'org.springframework.boot:spring-boot-devtools'
     implementation 'com.mysql:mysql-connector-j:8.0.33'
     
+    implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     
-    testImplementation 'org.junit.jupiter:junit-jupiter-api'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-    testRuntimeOnly 'org.junit.platform:junit-platform-engine'
+    //testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+    
 }
 
+
+configurations {
+    testRuntime {
+        extendsFrom testImplementation
+    }
+}
 
 test {
 	useJUnitPlatform()
@@ -82,7 +90,7 @@ jacocoTestCoverageVerification {
             limit {
                 counter = 'METHOD'
                 value = 'COVEREDRATIO'
-                minimum = 0.00
+                minimum = 0.80
             }
         }
     }
@@ -99,15 +107,14 @@ tasks.withType(Javadoc) {
 }
 
 
+task testCoverage(type: Test) {
+  group 'verification'
+  description 'Runs the unit tests with coverage'
 
+  dependsOn(':test',
+            ':jacocoTestReport',
+            ':jacocoTestCoverageVerification')
 
-
-//task testAndGenerateReport {
-  //  group 'verification'
-   // description 'test w/ jacoco'
-
-    //dependsOn ':test', ':jacocoTestReport', ':jacocoTestCoverageVerification'
-
-    //tasks.jacocoTestReport.mustRunAfter tasks.test
-    //tasks.jacocoTestCoverageVerification.mustRunAfter tasks.jacocoTestReport
-// }
+  tasks['jacocoTestReport'].mustRunAfter(tasks['test'])
+  tasks['jacocoTestCoverageVerification'].mustRunAfter(tasks['jacocoTestReport'])
+  }

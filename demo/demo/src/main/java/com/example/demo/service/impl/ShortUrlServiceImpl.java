@@ -51,15 +51,18 @@ public class ShortUrlServiceImpl implements ShortUrlService {
 
     String orgUrl;
     String shortUrl;
+    String hash;
 
     if (getShortUrl == null) {
+    	
       LOGGER.info("[getShortUrl] No Entity in Database.");
+      
       ResponseEntity<NaverUriDto> responseEntity =
           requestShortUrl(clientId, clientSecret, originalUrl);
 
       orgUrl = responseEntity.getBody().getResult().getOrgUrl();
       shortUrl = responseEntity.getBody().getResult().getUrl();
-      String hash = responseEntity.getBody().getResult().getHash();
+      hash = responseEntity.getBody().getResult().getHash();
 
       ShortUrl shortUrlEntity = new ShortUrl();
       shortUrlEntity.setOrgUrl(orgUrl);
@@ -169,6 +172,8 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     LOGGER.info("[requestShortUrl] request by restTemplate");
     ResponseEntity<NaverUriDto> responseEntity =
         restTemplate.exchange(uri, HttpMethod.GET, entity, NaverUriDto.class);
+    
+    // 여기서 통신 상태값, 상태에 따라 에러체크 해줄 수 있을듯
 
     LOGGER.info("[requestShortUrl] request has been successfully complete.");
 

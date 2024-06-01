@@ -15,14 +15,14 @@ import com.example.demo.config.env.EnvConfiguration;
 public class DemoApplication {
 	
 	 private final Logger LOGGER = LoggerFactory.getLogger(DemoApplication.class);
-
+	 
 	  @Autowired
 	  public DemoApplication(EnvConfiguration envConfiguration, ProfileManager profileManager) {
-	    LOGGER.info(envConfiguration.getMessage());
+		LOGGER.info("DemoApplication Log : {}", envConfiguration.getMessage());
 	    profileManager.printActiveProfiles();
 	  }
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		SpringApplication.run(DemoApplication.class, args);
 	}
 

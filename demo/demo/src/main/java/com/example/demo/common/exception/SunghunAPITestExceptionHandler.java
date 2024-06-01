@@ -32,10 +32,13 @@ public class SunghunAPITestExceptionHandler {
 		return new ResponseEntity<>(map, responseHeaders, httpStatus);
 	}
 	
+	// 
 	@org.springframework.web.bind.annotation.ExceptionHandler(value = SunghunAPITestException.class)
 	public ResponseEntity<Map<String, String>> ExceptionHandler(SunghunAPITestException e){
 		HttpHeaders responseHeaders = new HttpHeaders();
 		
+		LOGGER.info(e.getLocalizedMessage());
+		LOGGER.info("Advice내 SunghunAPITestExceptionHandler 호출");
 		
 		Map<String, String> map = new HashMap<>();
 		map.put("error type", e.getHttpStatusType());

@@ -48,8 +48,10 @@ public class ShortUrlController {
 	  @GetMapping()
 	  public ShortUrlResponseDto getShortUrl(String originalUrl) {
 	    long startTime = System.currentTimeMillis();
+	    
 	    ShortUrlResponseDto shortUrlResponseDto =
 	        shortUrlService.getShortUrl(CLIENT_ID, CLIENT_SECRET, originalUrl);
+	    
 	    long endTime = System.currentTimeMillis();
 
 	    LOGGER.info("[getShortUrl] response Time : {}ms", (endTime - startTime));

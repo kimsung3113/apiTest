@@ -32,6 +32,7 @@ public class HelloController {
 		return "Hello Sunghun API";
 	}
 	
+	// 런타임 환경인지 확인하고 리플렉션을 통해 정상적으로 값을 가져왔다는것을 체크 할 수 있다.
 	@RequestMapping("/hello1")
 	@MethodAnnotation(name = "Hello1", value = "World1")
 	public String hello1() throws NoSuchMethodException {
