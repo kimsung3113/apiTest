@@ -1,7 +1,7 @@
 # apiTest
 sunghun API project test
 
-SpringBoot 3.1.11 version
+SpringBoot 3.1.11 version -> 3.2.6 version upgrade
 mySql 8.0.32 version
 
 
@@ -18,4 +18,4 @@ mySql 8.0.32 version
 11. devtools, swagger, postman으로 API test
 12. custom annotation 생성 및 test
 13. gitignore 파일 추가
-14. maven -> gradle로 변경
+14. maven -> gradle로 변경하며 에러 해결(호환성, Junit(TDD), Jacoco)
