@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.common.exception.SunghunAPITestException;
 import com.example.demo.data.dto.ProductDto;
 import com.example.demo.data.entity.Product;
 import com.example.demo.data.handler.ProductDataHandler;
@@ -38,6 +39,17 @@ public class ProductServiceImpl implements ProductService{
 		ProductDto ProductDto = new ProductDto(productEntity.getId(),
 				productEntity.getName(), productEntity.getPrice(), productEntity.getStock());
 		return ProductDto;
+	}
+	
+	@Override
+	public ProductDto getProduct2(String productId) throws SunghunAPITestException {
+		// TODO Auto-generated method stub
+		
+		Product productEntity = productDataHandler.getProductEntityOptional(productId);
+		
+		ProductDto productDto = new ProductDto(productEntity.getId(), productEntity.getName(), productEntity.getPrice(), productEntity.getStock());
+		
+		return productDto;
 	}
 	
 }

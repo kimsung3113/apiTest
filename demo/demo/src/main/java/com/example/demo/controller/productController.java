@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.common.Constants.ExceptionClass;
@@ -47,6 +48,23 @@ public class productController {
 		
 		return productDto;
 	}
+	
+	// optional로 상품 ID가 없을때 customException을 발생시키게 만든다.
+	@GetMapping(value = "/product2")
+	public ProductDto getProduct2(@RequestParam String productId) throws SunghunAPITestException{
+		
+		long startTime = System.currentTimeMillis();
+		LOGGER.info("[ProductController] perform {} of Sunghun API", "getProduct2");
+		
+		ProductDto productDto = productService.getProduct2(productId);
+		
+		LOGGER.info("[ProductController] Response :: productId = {}, productName = {}, productPrice = {}, productStock = {}, Response Time = {}ms" ,
+				productDto.getProductId(), productDto.getProductName(), productDto.getProductPrice(), productDto.getProductStock(), (System.currentTimeMillis() - startTime));
+		
+		return productDto;
+		
+	}
+	
 	
 	@PostMapping(value = "/product")
 	public ResponseEntity<ProductDto> createProduct(@Valid @RequestBody ProductDto productDto) {
