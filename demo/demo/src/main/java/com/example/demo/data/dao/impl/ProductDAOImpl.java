@@ -66,4 +66,12 @@ public class ProductDAOImpl implements ProductDAO{
 				.orElseThrow(() -> new SunghunAPITestException(ExceptionClass.PRODUCT, HttpStatus.NOT_FOUND, "Input ProductId does not exists in Data"));
 	}
 	
+	@Override
+	public void deleteProduct(String productId) {
+		// TODO Auto-generated method stub
+		
+		productRepository.deleteById(productId);
+		
+	}
+	
 }

@@ -49,7 +49,7 @@ public class productController {
 		return productDto;
 	}
 	
-	// optional로 상품 ID가 없을때 customException을 발생시키게 만든다.
+	// 상품 불러오기2 - optional로 상품 ID가 없을때 customException을 발생시키게 만든다.
 	@GetMapping(value = "/product2")
 	public ProductDto getProduct2(@RequestParam String productId) throws SunghunAPITestException{
 		
@@ -90,9 +90,25 @@ public class productController {
 		
 	}
 	
-	@DeleteMapping(value = "/product/{productId}")
-	public ProductDto deleteProduct(@PathVariable String productId) {
-		return null;
+	// 상품 삭제
+	@DeleteMapping(value = "/product/{productId}/name/{productName}")
+	public ResponseEntity<String> deleteProduct(@PathVariable String productId, @PathVariable String productName) throws SunghunAPITestException {
+		
+		ProductDto productDto = productService.getProduct(productId);
+		
+		System.out.println("가져온 product Id & productName : " + productDto.getProductId() + "Name :" + productDto.getProductName());
+		System.out.println("매개변수 product Id & productName : " + productId + "Name :" + productName);
+		
+		
+		if(productDto.getProductId().equals(productId) && productDto.getProductName().equals(productName)) {
+			productService.deleteProduct(productId);
+			return ResponseEntity.status(HttpStatus.OK).body("상품이 정상적으로 삭제가 되었습니다.");
+			
+		}else {
+			throw new SunghunAPITestException(ExceptionClass.PRODUCT, HttpStatus.BAD_REQUEST, "삭제할 상품이 없습니다.");
+		}
+		
+		
 	}
 	
 	

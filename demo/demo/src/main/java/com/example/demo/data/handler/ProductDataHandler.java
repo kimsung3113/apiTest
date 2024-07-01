@@ -10,6 +10,8 @@ public interface ProductDataHandler {
 	Product getProductEntity(String productId);
 
 	Product getProductEntityOptional(String productId) throws SunghunAPITestException;
+
+	void deleteProduct(String productId);
 	
 	
 }

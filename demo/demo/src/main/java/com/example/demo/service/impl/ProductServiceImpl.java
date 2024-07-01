@@ -52,4 +52,12 @@ public class ProductServiceImpl implements ProductService{
 		return productDto;
 	}
 	
+	@Override
+	public void deleteProduct(String productId) {
+		// TODO Auto-generated method stub
+		
+		productDataHandler.deleteProduct(productId);
+		
+	}
+	
 }

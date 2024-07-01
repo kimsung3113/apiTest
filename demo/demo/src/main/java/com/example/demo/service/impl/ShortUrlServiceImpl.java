@@ -112,7 +112,7 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     ShortUrlResponseDto shortUrlResponseDto = new ShortUrlResponseDto(orgUrl, shortUrl);
 
     // Cache Logic
-    //shortUrlRedisRepository.save(shortUrlResponseDto);
+    shortUrlRedisRepository.save(shortUrlResponseDto);
 
     LOGGER.info("[generateShortUrl] Response DTO : {}", shortUrlResponseDto);
     return shortUrlResponseDto;

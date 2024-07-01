@@ -10,5 +10,7 @@ public interface ProductService {
 	ProductDto getProduct(String productId);
 
 	ProductDto getProduct2(String productId) throws SunghunAPITestException;
+
+	void deleteProduct(String productId);
 	
 }

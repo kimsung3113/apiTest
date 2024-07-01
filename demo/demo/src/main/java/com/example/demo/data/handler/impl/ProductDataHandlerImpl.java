@@ -41,4 +41,12 @@ public class ProductDataHandlerImpl implements ProductDataHandler{
 		return productDAO.getProduct2(productId);
 	}
 	
+	@Override
+	public void deleteProduct(String productId) {
+		// TODO Auto-generated method stub
+		
+		productDAO.deleteProduct(productId);
+		
+	}
+	
 }

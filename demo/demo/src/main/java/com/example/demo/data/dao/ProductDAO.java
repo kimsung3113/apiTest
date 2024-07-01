@@ -10,4 +10,6 @@ public interface ProductDAO {
 	Product getProduct(String productId);
 
 	Product getProduct2(String productId) throws SunghunAPITestException;
+
+	void deleteProduct(String productId);
 }
