@@ -64,10 +64,10 @@ public class ShortUrlServiceImpl implements ShortUrlService {
       shortUrl = responseEntity.getBody().getResult().getUrl();
       hash = responseEntity.getBody().getResult().getHash();
 
-      ShortUrl shortUrlEntity = new ShortUrl();
-      shortUrlEntity.setOrgUrl(orgUrl);
-      shortUrlEntity.setUrl(shortUrl);
-      shortUrlEntity.setHash(hash);
+      ShortUrl shortUrlEntity = new ShortUrl(orgUrl, shortUrl, hash);
+//      shortUrlEntity.setOrgUrl(orgUrl);
+//      shortUrlEntity.setUrl(shortUrl);
+//      shortUrlEntity.setHash(hash);
 
       shortUrlDAO.saveShortUrl(shortUrlEntity);
 
@@ -102,10 +102,10 @@ public class ShortUrlServiceImpl implements ShortUrlService {
     String shortUrl = responseEntity.getBody().getResult().getUrl();
     String hash = responseEntity.getBody().getResult().getHash();
 
-    ShortUrl shortUrlEntity = new ShortUrl();
-    shortUrlEntity.setOrgUrl(orgUrl);
-    shortUrlEntity.setUrl(shortUrl);
-    shortUrlEntity.setHash(hash);
+    ShortUrl shortUrlEntity = new ShortUrl(orgUrl, shortUrl, hash);
+//    shortUrlEntity.setOrgUrl(orgUrl);
+//    shortUrlEntity.setUrl(shortUrl);
+//    shortUrlEntity.setHash(hash);
 
     shortUrlDAO.saveShortUrl(shortUrlEntity);
 
