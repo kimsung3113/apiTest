@@ -33,6 +33,15 @@ public class ShortUrl extends BaseEntity {
 
   @Column(nullable = false, unique = true)
   private String orgUrl;
+  
+  
+  public ShortUrl(String orgUrl, String url, String hash) {
+	  
+	  this.orgUrl = orgUrl;
+	  this.url = url;
+	  this.hash = hash;
+  }
+  
 }
 
 

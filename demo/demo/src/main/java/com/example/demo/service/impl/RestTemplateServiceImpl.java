@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.example.demo.dto.Member;
+import com.example.demo.dto.Member.Request.MemberBean;
+import com.example.demo.dto.Member.Response.MemberPlusBean;
 import com.example.demo.dto.MemberDTO;
 import com.example.demo.service.RestTemplateService;
 
@@ -138,6 +141,48 @@ public class RestTemplateServiceImpl implements RestTemplateService{
 		LOGGER.info("body : {}", responseEntity.getBody());
 		
 		return responseEntity;
+	}
+	
+	@Override
+	public <T extends Member.Response> T changeMemberPlus(Member.Request.MemberBean memberBean, String resTypeName, Class<T> responseType) {
+		// TODO Auto-generated method stub
+		
+		URI uri = UriComponentsBuilder
+					.fromUriString("http://localhost:9091")
+					.path("/api/server/change-MemberPlus")
+					.encode()
+					.build()
+					.toUri();
+		
+//		Member.Request.MemberBean memberBean = new Member.Request.MemberBean();
+//		memberBean.setName("Kim Sung Hun");
+//		memberBean.setAge("30");
+//		memberBean.setWeight("64");
+		
+		String headerName, headerValue;
+		
+		if(resTypeName.equals("MemberPlus")) {
+			headerName = "XXX-MemberPlus-Header";
+			headerValue = "Member-Plus Header";
+		}else{
+			headerName = "XXX-MemberVip-Header";
+			headerValue = "Member-Vip Header";
+		}
+		
+		// HeaderName과 Value도 동적으로
+		RequestEntity<Member.Request.MemberBean> requestEntity = RequestEntity
+				.post(uri)
+				.header(headerName, headerValue)
+				.body(memberBean);
+		
+		RestTemplate restTemplate = new RestTemplate();
+		
+		ResponseEntity<T> responseEntity = restTemplate.exchange(requestEntity, responseType);
+		
+		LOGGER.info("status code : {}", responseEntity.getStatusCode());
+		LOGGER.info("body : {}", responseEntity.getBody());
+		
+		return responseEntity.getBody();
 	}
 	
 }

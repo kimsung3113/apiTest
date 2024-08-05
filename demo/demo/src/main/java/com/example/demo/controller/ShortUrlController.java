@@ -64,6 +64,20 @@ public class ShortUrlController {
 	    return null;
 	  }
 
+		/*
+		 * TODO 에러 잡기
+		 * 
+		 * org.springframework.dao.InvalidDataAccessApiUsageException: Entity must not
+		 * be null at
+		 * com.example.demo.data.dao.impl.ShortUrlDaoImpl.deleteByOriginalUrl(
+		 * ShortUrlDaoImpl.java:58) at
+		 * com.example.demo.service.impl.ShortUrlServiceImpl.deleteByOriginalUrl(
+		 * ShortUrlServiceImpl.java:145) at
+		 * com.example.demo.service.impl.ShortUrlServiceImpl.deleteShortUrl(
+		 * ShortUrlServiceImpl.java:134) at
+		 * com.example.demo.controller.ShortUrlController.deleteShortUrl(
+		 * ShortUrlController.java:70)
+		 */
 	  @DeleteMapping("/")
 	  public ResponseEntity<String> deleteShortUrl(String url) {
 	    try {

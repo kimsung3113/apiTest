@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.common.Constants.ExceptionClass;
+import com.example.demo.common.exception.SunghunAPITestException;
 import com.example.demo.data.dao.ProductDAO;
 import com.example.demo.data.entity.Product;
 import com.example.demo.data.repository.ProductRepository;
@@ -51,4 +54,24 @@ public class ProductDAOImpl implements ProductDAO{
 		
 		return productEntity;
 	}
+	
+	@Override
+	public Product getProduct2(String productId) throws SunghunAPITestException{
+		// TODO Auto-generated method stub
+		
+//		Product productEntity = productRepository.findById(productId)
+//				.orElseThrow(() -> new SunghunAPITestException(ExceptionClass.PRODUCT, HttpStatus.NO_CONTENT, "상품 ID가 없습니다."));
+		
+		return productRepository.findById(productId)
+				.orElseThrow(() -> new SunghunAPITestException(ExceptionClass.PRODUCT, HttpStatus.NOT_FOUND, "Input ProductId does not exists in Data"));
+	}
+	
+	@Override
+	public void deleteProduct(String productId) {
+		// TODO Auto-generated method stub
+		
+		productRepository.deleteById(productId);
+		
+	}
+	
 }
