@@ -22,3 +22,4 @@ mySql 8.0.32 version
 15. 내가 만든 header와 resttemplate response type 동적으로 변경할 수 있게 구조와 코드 변경 후 test 완료.
 16. 내가 만들어놓은 서버에서 httpServletRequst로 Enumeration해서 읽어오기 vs. @RequestHeader test
 17. DTO를 inner class들과 추상클래스들로 만들어 구조 깨끗하게 변경 후 test중.
+18. DB와 redis Docker에 올리고 Server 프로젝트 구축 후 Docker 컨테이너에 올려 실행 test 완료
