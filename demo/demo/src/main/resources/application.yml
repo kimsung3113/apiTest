@@ -66,10 +66,15 @@ sunghun:
    api: 
       short: 
           uri: 
-             id: OK50KchcdDwittZl2dQz
-             secret: oN8EnapOdp
+             id: ENC(6W2wv37f/9isBPnRhBtbsLK+L9olXomD0GO1i60pznU=)
+             secret: ENC(BGNy0n4oIIMxjIYxbhjz9ddD32OBFYUl)
           loading: 
            message: ## local 환경으로 실행되었습니다 ##
+           
+public:
+    data:
+      portal:
+          key: ENC(ZVaLEd39egja+qTUJKLP5tGyrL1gDlajRs6EfJtGKY+mN0r4C6USJM1dJAdEXE0lIzmUShFHLlykLOQ8r/EQ6oQsA+No6dlyUTFS02wPaLeNnGoSgEbBVmjyHg90CGTbW+dTTAS+tc8=)
 
 # 프로퍼티 암호화 설정
 jasypt: 
@@ -88,8 +93,8 @@ sunghun:
       
 datasource:
     url: jdbc:mysql://localhost:3306/SpringBootAPITest
-    username: jspid
-    password: jsppass
+    username: ENC(qDi/4J0f1DelqymESItwRA==)
+    password: ENC(Wrue5qPVZseZ4f3d3PnNdg==)
     driverClassName: com.mysql.cj.jdbc.Driver
 
 ---
