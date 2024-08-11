@@ -25,4 +25,4 @@ mySql 8.0.32 version
 18. DB와 redis Docker에 올리고 Server 프로젝트 구축 후 Docker 컨테이너에 올려 실행 test 완료
 19. 공공데이터 포탈 API 연동 후 exceptionhandler로 exception Custom
 - API 정의서
-    [공공데이터 포탈 API 정의서](https://www.notion.so/API-62ba052772a54c148e75758d0fb4382d?pvs=21)
+    [공공데이터 포탈 API 정의서](https://stone-handball-bb7.notion.site/API-62ba052772a54c148e75758d0fb4382d)
