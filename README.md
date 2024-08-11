@@ -24,5 +24,5 @@ mySql 8.0.32 version
 17. DTO를 inner class들과 추상클래스들로 만들어 구조 깨끗하게 변경 후 test중.
 18. DB와 redis Docker에 올리고 Server 프로젝트 구축 후 Docker 컨테이너에 올려 실행 test 완료
 19. 공공데이터 포탈 API 연동 후 exceptionhandler로 exception Custom
-- 공공데이터 포탈 정의서 
-    [공공데이터 포탈 API 정의서 (1)](https://www.notion.so/API-1-dce2f212a4f64c8887f493a6f3941e17?pvs=21)
+- API 정의서
+    [공공데이터 포탈 API 정의서](https://www.notion.so/API-62ba052772a54c148e75758d0fb4382d?pvs=21)
