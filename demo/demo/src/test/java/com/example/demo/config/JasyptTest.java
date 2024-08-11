@@ -11,8 +11,8 @@ public class JasyptTest {
 
   @Test
   void encryptTest() {
-    String id = "sunghun.kim";
-    String password = "tjdgns12#";
+    String id = "r";
+    String password = "rz";
 
     System.out.println("id : " + jasyptEncoding(id));
     System.out.println("password : " + jasyptEncoding(password));
